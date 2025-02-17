@@ -11,10 +11,10 @@ void calculate_electricity_bill() {
     float total_bill;
 
     printf("Enter Customer Name: ");
-    scanf(" %[^\n]s", customer_name); // Note the space before % in scanf
+    scanf(" %s", customer_name); // Note the space before % in scanf
 
     printf("Enter Customer ID: ");
-    scanf(" %[^\n]s", customer_id); // Note the space before % in scanf
+    scanf(" %s", customer_id); // Note the space before % in scanf
 
     printf("Enter Total Units Consumed: ");
     scanf("%d", &units_consumed);
