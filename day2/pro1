@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<stdlib.h>
+int input(char* name,int cls){
+    printf("Enter the name\n");
+    scanf("%s",name);
+    printf("Enter ward type:\n");
+    scanf("%d",&cls);
+   
+    return cls;
+}
+void compute(char *name,int cls,int day){
+    int sum,dis;
+    if(cls ==1){
+        // printf("%d",day);
+        sum=day*1000;
+    }else if(cls ==2){
+        sum=day*2000;
+    } else if(cls==3){
+        sum=day*5000;
+    }else{
+      printf("invalid ward");
+      exit(0);
+    }
+printf("patient Name %s\n",name);
+printf("bill amount is %d\n",sum);
+if(day>7){
+    dis=0.05*sum;
+    sum=sum-dis;
+    printf("discount is %d\n",dis);
+    printf("Final bill is %d\n",sum);
+    return;
+}
+}
+void main(){
+    int day,cls;
+    char name[10];
+     cls=input(name,cls);
+    printf("Total no. of days admitted\n");
+    scanf("%d",&day);
+    compute(name,cls,day);
+    
+}
+
