@@ -1,0 +1,16 @@
+#include<stdio.h>
+int facto(int n){
+    int fact=1;
+    if(n==1 || n==0){
+        return 1 ;
+    }
+     fact=n*facto(n-1);
+     return fact;
+}
+void main(){
+    int n,k;
+    printf("Enter the no.\n");
+    scanf("%d",&n);
+    k=facto(n);
+    printf("FActorial of %d is %d\n",n,k);
+}
