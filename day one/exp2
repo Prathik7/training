@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include<string.h>
+int main() {
+   int id;
+   float sal;
+   char name[255];
+   int attend;
+   //read employee
+   printf("Enter id:");
+   scanf("%d",&id);
+   
+   printf("Enter name:");
+   scanf("%s",name);
+   
+   printf("enter salary:");
+   scanf("%f",&sal);
+   
+   printf("Enter attendence:");
+   scanf("%d",&attend);
+   //process payroll
+   float bonus=0;
+   float gross_sal=0;
+   char category[50]="Good";
+   //cal bonus
+   if(attend>25){
+       bonus=sal*0.05;
+   }else if(attend<10){
+       bonus=-(sal/2);
+   }
+   //final salary
+   gross_sal=(sal+bonus);
+   //catagorise employee
+   if(attend>25){
+       strcpy(category,"Excellent");
+   }else if(attend<10){
+       strcpy(category,"Need_improvement");
+   }
+// print
+    printf("\n\n\n");
+    printf("ID: %d\n",id);
+    printf("Name:%s\n",name);
+    printf("basic sal:%.2f\n",sal);
+    if(bonus>0){
+        printf("Bonus:%0.2f\n",bonus);
+    }
+    printf("final sal:%.2f\n",gross_sal);
+    printf("employee catogory:%s\n",category);
+    return 0;
+}
