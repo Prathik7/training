@@ -1,0 +1,30 @@
+#include<stdio.h>
+void read(int* pn){
+    printf("enter the number of product");
+    scanf("%d",pn);
+    return;
+}
+int compute(int n,int weight,int accept,int reject){
+    for(int i=0;i<n;i++){
+        printf("Enter weight\n");
+        scanf("%d",&weight);
+        if(weight>950 && weight<1050)
+            accept++;
+        else
+            reject++;
+        
+    }
+     printf("no. of rejected proiduct is %d\n",reject);
+    return accept;
+}
+void paste(int accept,int reject){
+    printf("no. of Accepted proiduct is %d\n",accept);
+   
+}
+void main()
+{
+    int n,weight,accept=0,reject=0;
+    read(&n);
+    accept=compute(n,weight,accept,reject);
+    paste(accept,reject);
+}
