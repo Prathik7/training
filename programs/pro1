@@ -9,10 +9,20 @@ void readdata(int* pcs,float* psal,int* pexp){
 void main()
 {
     int cs,exp;
+    int ch;
     float sal;
+    while(1){
    readdata(&cs,&sal,&exp);
    if(eligible(sal,cs,exp))
-        printf("approved");
+        printf("approved\n");
     else
-        printf("rejected");
+        printf("rejected\n"); 
+    printf("do u want to continue\n1-continue\n0-exit\n");   
+    scanf("%d",&ch);
+    printf("%d",ch);
+    if(ch==1)
+        continue;
+    else
+        break;
+    }
 }
