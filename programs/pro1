@@ -1,0 +1,18 @@
+#include<stdio.h>
+void readdata(int* pcs,float* psal,int* pexp){
+    printf("Enter the salary:\n credit_score:\n exp:\n");
+    scanf("%f%d%d",psal,pcs,pexp);
+}
+ int eligible(float sal,int cs,int exp){
+    return(sal>=30000 && cs>=750 && exp>=2);
+}
+void main()
+{
+    int cs,exp;
+    float sal;
+   readdata(&cs,&sal,&exp);
+   if(eligible(sal,cs,exp))
+        printf("approved");
+    else
+        printf("rejected");
+}
