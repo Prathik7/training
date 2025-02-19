@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_PASSENGERS 100
+
+typedef struct {
+    char name[50];
+    int age;
+    char destination[50];
+} Passenger;
+
+void sort_passengers_by_destination(Passenger passengers[], int n) {
+    Passenger temp;
+    for (int i = 0; i < n-1; i++) {
+        for (int j = i+1; j < n; j++) {
+            if (strcmp(passengers[i].destination, passengers[j].destination) > 0) {
+                temp = passengers[i];
+                passengers[i] = passengers[j];
+                passengers[j] = temp;
+            }
+        }
+    }
+}
+
+void search_passengers_by_destination(Passenger passengers[], int n, char destination[]) {
+    printf("Passengers traveling to %s:\n", destination);
+    int found = 0;
+    for (int i = 0; i < n; i++) {
+        if (strcasecmp(passengers[i].destination, destination) == 0) {
+            printf("%s\n", passengers[i].name);
+            found = 1;
+        }
+    }
+    if (!found) {
+        printf("No passengers traveling to %s\n", destination);
+    }
+}
+
+int main() {
+    Passenger passengers[MAX_PASSENGERS];
+    int n, age;
+    char name[50], destination[50];
+
+    printf("Enter number of passengers: ");
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        printf("Passenger %d Name: ", i + 1);
+        scanf("%s", name);
+        printf("Passenger %d Age: ", i + 1);
+        scanf("%d", &age);
+        printf("Passenger %d Destination: ", i + 1);
+        scanf("%s", destination);
+
+        strcpy(passengers[i].name, name);
+        passengers[i].age = age;
+        strcpy(passengers[i].destination, destination);
+    }
+
+    sort_passengers_by_destination(passengers, n);
+
+    printf("\nSorted List (by destination):\n");
+    for (int i = 0; i < n; i++) {
+        printf("%s - %s\n", passengers[i].name, passengers[i].destination);
+    }
+
+    printf("\nEnter destination to search: ");
+    scanf("%s", destination);
+
+    search_passengers_by_destination(passengers, n, destination);
+
+    return 0;
+}
