@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+void sort_salaries(int salaries[], int n) {
+    int temp;
+    for (int i = 0; i < n-1; i++) {
+        for (int j = i+1; j < n; j++) {
+            if (salaries[i] > salaries[j]) {
+                temp = salaries[i];
+                salaries[i] = salaries[j];
+                salaries[j] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int n, i;
+    int total_payroll = 0;
+
+    printf("Enter number of employees: ");
+    scanf("%d", &n);
+
+    int salaries[n];
+    printf("Enter salaries of %d employees: ", n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &salaries[i]);
+        total_payroll += salaries[i];
+    }
+
+    sort_salaries(salaries, n);
+
+    printf("\nSorted Salaries: ");
+    for (i = 0; i < n; i++) {
+        printf("%d ", salaries[i]);
+    }
+
+    printf("\nSecond Highest Salary: %d", salaries[n-2]);
+    printf("\nTotal Payroll: Rs %d\n", total_payroll);
+
+    return 0;
+}
