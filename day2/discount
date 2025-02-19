@@ -1,0 +1,16 @@
+#include<stdio.h>
+int discount(float bill,float avg){
+    avg=0;
+    if(bill>=500 && bill<=1000){
+        avg=bill*0.1;
+    }else if(bill>=1000){
+        avg=bill*0.2;
+    }return bill-avg;
+}
+void main(){
+    float bill,avg;
+    printf("Enter total bill:");
+    scanf("%f",&bill);
+    avg=discount(bill,avg);
+    printf("After discount the bill is :%f",avg);
+}
