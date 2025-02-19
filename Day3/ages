@@ -1,0 +1,24 @@
+#include<stdio.h>
+void display(short int* age,int len, int index){
+    if(len>0){
+      printf("%d\t",age[index]);
+      len--;
+      display(age,len,(index+1));
+    }
+    return;
+}
+void rev(short int* age,int len){
+    if(len>0){
+        printf("%d\t",age[len-1]);
+        len--;
+        rev(age,len);
+    }return;
+}
+
+int main(){
+    short int age[] = {40,72,45,51,12};
+    display(age,5,0);
+    printf("\n");
+    rev(age,5);
+    return 0;
+}
