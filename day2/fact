@@ -1,6 +1,7 @@
 #include<stdio.h>
+#include<stdlib.h>
 int facto(int n){
-    int fact=1;
+     int fact=1;
     if(n==1 || n==0){
         return 1 ;
     }
@@ -8,9 +9,12 @@ int facto(int n){
      return fact;
 }
 void main(){
-    int n,k;
+    int n;
     printf("Enter the no.\n");
     scanf("%d",&n);
-    k=facto(n);
-    printf("FActorial of %d is %d\n",n,k);
+    if(n<0){
+        printf("Negative no. not allowed");
+        exit(0);
+    }
+    printf("FActorial of %d is %d\n",n,facto(n));
 }
