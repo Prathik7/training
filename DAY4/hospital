@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_PATIENTS 100
+
+typedef struct {
+    char name[50];
+    int level;
+} Patient;
+
+void sort_patients_by_emergency_level(Patient patients[], int n) {
+    Patient temp;
+    for (int i = 0; i < n-1; i++) {
+        for (int j = i+1; j < n; j++) {
+            if (patients[i].level < patients[j].level) {
+                temp = patients[i];
+                patients[i] = patients[j];
+                patients[j] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int n;
+    Patient patients[MAX_PATIENTS];
+
+    printf("Enter number of patients: ");
+    scanf("%d", &n);
+
+    printf("Enter patient data (Name - Level):\n");
+    for (int i = 0; i < n; i++) {
+        printf("Patient %d: ", i + 1);
+        scanf("%s - %d", patients[i].name, &patients[i].level);
+    }
+
+    sort_patients_by_emergency_level(patients, n);
+
+    printf("\nSorted by Emergency Level:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d. %s - Level %d\n", i + 1, patients[i].name, patients[i].level);
+    }
+
+    printf("\nTop 3 Critical Patients:\n");
+    for (int i = 0; i < 3 && i < n; i++) {
+        printf("%d. %s\n", i + 1, patients[i].name);
+    }
+
+    return 0;
+}
