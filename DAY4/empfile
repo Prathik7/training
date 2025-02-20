@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+typedef struct {
+    int id;
+    char name[50];
+    float salary;
+} Employee;
+
+void writeToFile(Employee emp[], int n) {
+    FILE *fptr = fopen("employees.txt", "w");
+    if (fptr == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+    for (int i = 0; i < n; i++) {
+        fprintf(fptr, "%d %s %.2f\n", emp[i].id, emp[i].name, emp[i].salary);
+    }
+    fclose(fptr);
+}
+
+void readFromFile() {
+    FILE *fptr = fopen("employees.txt", "r");
+    if (fptr == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+    printf("Employees Data from File:\n");
+    int id;
+    char name[50];
+    float salary;
+    while (fscanf(fptr, "%d %s %f", &id, name, &salary) != EOF) {
+        printf("%d %s %.2f\n", id, name, salary);
+    }
+    fclose(fptr);
+}
+
+int main() {
+    int n;
+    printf("Enter number of employees: ");
+    scanf("%d", &n);
+
+    Employee employees[n];
+    for (int i = 0; i < n; i++) {
+        printf("Enter details (ID, Name, Salary) for employee %d: ", i + 1);
+        scanf("%d %s %f", &employees[i].id, employees[i].name, &employees[i].salary);
+    }
+
+    writeToFile(employees, n);
+    readFromFile();
+
+    return 0;
+}
