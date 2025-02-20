@@ -1,0 +1,71 @@
+#include<stdio.h>
+struct employeet{
+    char name[25];
+    int id;
+    float sal;
+    char dept[10];
+};
+typedef  struct employeet employee;
+void reademp(employee emp[1000],int n);
+void display(employee emp[1000],int n);
+employee sechigh(employee emp[1000],int n);
+void savefile(employee emp[],int n);
+void loademp(employee emp[],int n);
+
+void main(){
+    int count;
+    printf("Enter the no. of employees\n");
+    scanf("%d",&count);
+    employee emps[1000];
+    reademp(emps,count);
+    display(emps,count);
+    savefile(emps,count);
+    loademp(emps,count);
+    employee highemp =sechigh(emps,count);
+    printf("employee with highest salary:\n %s\n%.2f\n(%s)",highemp.name,highemp.sal,highemp.dept);
+}
+void reademp(employee emp[],int n){
+    // printf("Enter %d employees\n",n);
+    for(int i=0;i<n;i++){
+        printf("Enter %d emp details\n",i+1);
+        printf("Enter name\nid\nsal\ndept\n");
+        scanf("%s%d%f%s",emp[i].name,&emp[i].id,&emp[i].sal,emp[i].dept);  
+    }
+}
+employee sechigh(employee emp[],int n){
+    employee emps=emp[0];
+    for(int i=1;i<n;i++){
+        if(emp[i].sal>emps.sal){
+            emps=emp[i];
+        }
+    }
+    return emps;
+}
+void display(employee emp[1000],int n){
+    for(int i=0;i<n;i++){
+        printf("name:%s\nID:%d\nsalary:%f\ndepartment:%s\n",emp[i].name,emp[i].id,emp[i].sal,emp[i].dept);
+    }
+}
+void savefile(employee emp[],int n){
+    FILE* file= fopen("emp234.txt","w");
+    if(file==NULL){
+        printf("File empty");
+        return;
+    }
+     for(int i=0;i<n;i++){
+        fprintf(file,"%s\n%d\n%f\n%s\n",emp[i].name,emp[i].id,emp[i].sal,emp[i].dept);
+    }
+    fclose(file);
+}
+void loademp(employee emp[],int n){
+     FILE* file= fopen("employee.txt","r");
+    if(file==NULL){
+        printf("File empty");
+        return;
+    }
+     for(int i=0;i<n;i++){
+        fscanf(file,"%s\n%d\n%f\n%s\n",emp[i].name,&emp[i].id,&emp[i].sal,emp[i].dept);
+    }
+    fclose(file);
+    
+}
