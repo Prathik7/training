@@ -35,8 +35,8 @@ int main() {
                     break;
         }
     }while(1);
-    // savestudent(std,count);
-    // displayfile(std,count);
+    savestudent(std,count);
+    displayfile(std,count);
     // display(std,count);
     return 0;
 }
