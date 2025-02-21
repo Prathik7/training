@@ -1,0 +1,111 @@
+#include <stdio.h>
+#include <stdlib.h> 
+#include "Student.h"
+// typedef struct {
+//     int rollNo;         // Student Roll Number
+//     char name[50];      // Student Name
+//     int maths, physics, chemistry, cs; // Subject Marks
+//     int totalMarks;     // Sum of all subjects
+//     float percentage;   // Percentage calculation
+//     char grade;         // Assigned grade (A, B, C, D, F)
+// } Student;
+void readstudent(Student std[], int count);
+void display(const Student std[], int count);
+void savestudent(Student std[], int count);
+void displayfile(Student std[], int count);
+int main() {
+    Student std[100];
+    int count,ch;
+    // printf("Enter the number of students: ");
+    // scanf("%d", &count);
+    // readstudent(std,count);
+   
+    do{
+         printf("choose choice:\n1-read\n2-display\n");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1: printf("Enter the number of students: ");
+                    scanf("%d", &count);
+                    readstudent(std,count);
+                    break;
+            case 2: display(std,count);
+                    break;
+            case 3: printf("Exit\n");
+                    exit(0);
+            default:printf("Invalid choice\n");
+                    break;
+        }
+    }while(1);
+    // savestudent(std,count);
+    // displayfile(std,count);
+    // display(std,count);
+    return 0;
+}
+void readstudent(Student std[], int count) {
+    printf("Enter the %d students details:\n", count);
+    for (int i=0;i<count;i++) {
+        printf("Enter student Id, Name, 4 subject marks: ");
+        scanf("%d %s %d %d %d %d", &std[i].rollNo, std[i].name, &std[i].maths,
+              &std[i].physics, &std[i].chemistry, &std[i].cs);
+        std[i].totalMarks=std[i].maths + std[i].physics + std[i].chemistry + std[i].cs;
+        std[i].percentage=(float)std[i].totalMarks/4.0;
+        if (std[i].percentage>=90)
+            std[i].grade = 'A';
+        else if (std[i].percentage>=75)
+            std[i].grade = 'B';
+        else if (std[i].percentage>=50)
+            std[i].grade = 'C';
+        else if (std[i].percentage>=35)
+            std[i].grade = 'D';
+        else
+            std[i].grade = 'F';
+    }
+}
+void display(const Student std[], int count) {
+    printf("\nStudent details:\n");
+    for (int i=0;i<count;i++){
+        printf("\n--------------------------------------\n");
+        printf("Id: %d\nName: %s\n------------------------\nMarks: %d %d %d %d\nTotal Marks: %d\n----------------\nPercentage: %.2f\nGrade: %c\n------------\n",
+               std[i].rollNo,std[i].name,std[i].maths,std[i].physics,std[i].chemistry,std[i].cs,
+               std[i].totalMarks,std[i].percentage,std[i].grade);
+    }
+}
+void savestudent(Student std[], int count) {
+    FILE *file = fopen("Student_details.txt", "w");
+    if (file == NULL) {
+        printf("Cannot open file for writing\n");
+        exit(0); 
+    }
+    for (int i=0;i<count;i++) {
+        fprintf(file,"%d %s %d %d %d %d\n",std[i].rollNo,std[i].name,std[i].maths,
+                std[i].physics,std[i].chemistry,std[i].cs);
+    }
+    fclose(file);
+}
+void displayfile(Student std[],int count) {
+    FILE *file=fopen("Student_details.txt", "r");
+    if (file==NULL) {
+        printf("Cannot open file for reading\n");
+        return;
+    }
+    for (int i=0;i<count;i++) {
+        if (fscanf(file,"%d %s %d %d %d %d",&std[i].rollNo,std[i].name,&std[i].maths,
+                   &std[i].physics, &std[i].chemistry, &std[i].cs)) {
+            printf("Error reading from file or end of file reached.\n");
+            break;
+        }
+        std[i].totalMarks=std[i].maths+std[i].physics+std[i].chemistry+std[i].cs;
+        std[i].percentage=(float)std[i].totalMarks/4.0;
+        if (std[i].percentage >= 90)
+            std[i].grade = 'A';
+        else if (std[i].percentage >= 80)
+            std[i].grade = 'B';
+        else if (std[i].percentage >= 65)
+            std[i].grade = 'C';
+        else if (std[i].percentage >= 35)
+            std[i].grade = 'D';
+        else
+            std[i].grade = 'F';
+    }
+    fclose(file);
+}
