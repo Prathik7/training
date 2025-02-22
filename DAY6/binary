@@ -1,0 +1,26 @@
+#include<stdio.h>
+int searchBinary(float* salaries, int size, float searchSalary);
+void main(){
+    float salaries[]={10,20,30,40,50};
+    int salcount=5;
+    float searchsal=40;
+    searchBinary(salaries,salcount,searchsal);
+    int index=searchBinary(salaries,salcount,searchsal);
+    printf("%.2f is found at %d\n",searchsal,index);
+}
+
+int searchBinary(float* salaries, int size, float searchSalary) {
+int left = 0, right = size - 1;
+while (left <= right) {
+
+int mid=(left + right) / 2;
+
+if(salaries [mid] == searchSalary) {
+return mid;
+    } else if(searchSalary < salaries [mid]) {
+        right = mid - 1;
+       } else {
+        left = mid + 1;
+             }
+    } return -1;
+}
