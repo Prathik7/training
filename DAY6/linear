@@ -1,0 +1,17 @@
+#include<stdio.h>
+ int searchlinear(float arr[],int size,float target){
+    for(int i=0;i<size;i++){
+        if(arr[i]==target){
+            return i+1;
+        }
+    }
+    return -1;
+}
+void main(){
+    float salaries[]={20.0,10.0,15.0,12.0,13.0};
+    int salcount=5;
+    float searchsal=12;
+    int index=searchlinear(salaries,salcount,searchsal);
+    printf("%.2f is found at %d\n",searchsal,index);
+}
+
